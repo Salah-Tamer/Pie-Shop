@@ -1,3 +1,5 @@
+using PieShop.Models;
+
 namespace PieShop
 {
     public class Program
@@ -8,7 +10,10 @@ namespace PieShop
 
             builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+			builder.Services.AddScoped<IPieRepository, MockPieRepository>();
+			builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+
+			var app = builder.Build();
 
             app.UseStaticFiles();
 
