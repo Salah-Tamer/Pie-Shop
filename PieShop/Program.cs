@@ -32,6 +32,8 @@ namespace PieShop
 
             app.MapDefaultControllerRoute();
 
+            DbInitializer.Seed(app);
+
             app.Run();
         }
     }
