@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using PieShop.Models;
 
 namespace PieShop
@@ -10,8 +11,15 @@ namespace PieShop
 
             builder.Services.AddControllersWithViews();
 
-			builder.Services.AddScoped<IPieRepository, MockPieRepository>();
-			builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+            builder.Services.AddScoped<IPieRepository, PieRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<PieShopDbContext>(options =>
+            {
+                options.UseSqlServer(
+                    builder.Configuration["ConnectionStrings:PieShopDbContextConnection"]);
+            });
 
 			var app = builder.Build();
 
