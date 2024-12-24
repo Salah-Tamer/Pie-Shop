@@ -30,7 +30,7 @@ namespace PieShop
                 app.UseDeveloperExceptionPage();
             }
 
-            app.MapDefaultControllerRoute();
+            app.MapDefaultControllerRoute(); //"{Controller=Home}/{Actions=Index}/{id?}"
 
             DbInitializer.Seed(app);
 
