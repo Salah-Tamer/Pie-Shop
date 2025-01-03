@@ -13,6 +13,10 @@ namespace PieShop
 
             builder.Services.AddScoped<IPieRepository, PieRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IShoppingCart, ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+
+            builder.Services.AddSession();
+            builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<PieShopDbContext>(options =>
@@ -23,14 +27,18 @@ namespace PieShop
 
 			var app = builder.Build();
 
-            app.UseStaticFiles();
 
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.MapDefaultControllerRoute(); //"{Controller=Home}/{Actions=Index}/{id?}"
+            app.UseStaticFiles();
+            app.UseSession();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             DbInitializer.Seed(app);
 
