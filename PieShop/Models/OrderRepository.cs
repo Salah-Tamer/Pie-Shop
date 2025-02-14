@@ -14,6 +14,7 @@
         public void CreateOrder(Order order)
         {   
             order.OrderPlaced = DateTime.Now;
+            order.OrderDetails = new List<OrderDetail>();
 
             List<ShoppingCartItem> shoppingCartItems = _shoppingCart.ShoppingCartItems;
             order.OrderTotal = _shoppingCart.GetShoppingCartTotal();
