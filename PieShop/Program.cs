@@ -20,6 +20,7 @@ namespace PieShop
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
             builder.Services.AddDbContext<PieShopDbContext>(options =>
             {
                 options.UseSqlServer(
@@ -41,6 +42,7 @@ namespace PieShop
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            app.MapRazorPages();
             DbInitializer.Seed(app);
 
             app.Run();
