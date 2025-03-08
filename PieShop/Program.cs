@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PieShop.Models;
+using System.Text.Json.Serialization;
 
 namespace PieShop
 {
@@ -9,7 +10,11 @@ namespace PieShop
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
 
             builder.Services.AddScoped<IPieRepository, PieRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
