@@ -1,8 +1,6 @@
 ﻿using PieShop.Models;
 using PieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using PieShop.Models;
-using PieShop.ViewModels;
 
 namespace BethanysPieShop.Controllers
 {
@@ -54,6 +52,11 @@ namespace BethanysPieShop.Controllers
                 return NotFound();
 
             return View(pie);
+        }
+
+        public IActionResult Search()
+        {
+            return View();
         }
     }
 }
