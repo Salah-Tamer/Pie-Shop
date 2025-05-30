@@ -48,6 +48,7 @@ namespace PieShop
             app.UseStaticFiles();
             app.UseSession();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
